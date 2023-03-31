@@ -4,7 +4,6 @@ import java.util.List;
 
 import StudyShop.entity.Product;
 import StudyShop.repository.ProductRepoJpa;
-import StudyShop.session.SessionStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +15,6 @@ import javax.servlet.http.HttpSession;
 public class ShopController {
   @Autowired
   private ProductRepoJpa productRepo;
-
-  @Autowired
-  private SessionStorage sessionStorage;
 
   @GetMapping("/shop")
   public String getProducts(Model model
@@ -64,5 +60,4 @@ public class ShopController {
     return "products";
   }
     }
-  }
-}
+
