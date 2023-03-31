@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Bootstrap E-Commerce Template- DIGI Shop mini</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link th:href="@{/css/main-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><strong>DIGI</strong> Shop</a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="city-picker">
+                Выберите город
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">cart</a></li>
+            </ul>
+            </li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Keyword Here ..." class="form-control">
+                </div>
+                &nbsp;
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<div class="row">
+    <div class="col-md-4 text-center col-sm-6 col-xs-6" th:each="product : ${products}">
+        <div class="thumbnail product-box">
+            <img src="assets/img/dummyimg.png" alt=""/>
+            <div class="caption">
+                <h3><a href="#" th:text="${product.name}"></a></h3>
+                <p>Price : <strong th:text="${product.price}"></strong></p>
+                <p><a href="#">Ptional dismiss button </a></p>
+                <p>Ptional dismiss button in tional dismiss button in </p>
+                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary"
+                                                                                        role="button">See Details</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer -->
+    <div class="col-md-12 footer-box">
+
+
+        <div class="row small-box ">
+            view all items
+        </div>
+
+        <hr>
+    </div>
+    <!-- /.col -->
+    <div class="col-md-12 end-box ">
+        &copy; 2014
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="city"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-city">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+    <!--Footer end -->
+    <!--Core JavaScript file  -->
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script>
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+        $(document).ready(function () {
+            $("#save-city").on("click", function (){
+                let getCity = $('#city').val();
+                document.cookie = 'city=' + getCity;
+                $('#exampleModal').modal('hide');
+                $("#city-picker").text(getCity);
+            });
+            let cookie = getCookie('city');
+            if (cookie === undefined) {
+                $('#exampleModal').modal('show');
+            } else {
+                $("#city-picker").text(cookie);
+            }
+        })
+    </script>
+</body>
+</html>
